@@ -1,30 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { compose } from 'redux';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
+import { createLaneRequest, fetchLanes } from '../Lane/LaneActions';
+import Lanes from '../Lane/Lanes';
 
 // Import Style
 import styles from './Kanban.css';
+// import styles from '../Lane/Lane.css';
 
-class Kanban extends Component {
-  render() {
-    return (
-    );
-  }
-}
+const Kanban = props => (
+  <div className={styles.laneButton}>
+    <button className={styles.addLaneButton} onClick={() => props.createLane({ name: 'New column' })}>✚ column</button>
+    <Lanes lanes={props.lanes} />
+  </div>
+);
 
-const mapStateToProps = (state) => {
-  return {};
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
+Kanban.need = [() => { return fetchLanes(); }];
 
 Kanban.propTypes = {
+  lanes: PropTypes.array,
+  createLane: PropTypes.func,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+const mapStateToProps = state => ({
+  lanes: Object.values(state.lanes)
+});
+
+const mapDispatchToProps = {
+  createLane: createLaneRequest,
+};
+
+// higher-order functions
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  DragDropContext(HTML5Backend)
 )(Kanban);

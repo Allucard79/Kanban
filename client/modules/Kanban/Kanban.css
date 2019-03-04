@@ -1,1 +1,22 @@
 /* Kanban styles */
+
+.laneButton {
+  text-align: center;
+}
+
+.addLaneButton {
+  background-color: #ffffff;
+  width: 100px;
+  height: 40px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  border: 1px solid #6f7276;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.addLaneButton:hover {
+  background-color: #DDDDDD;
+}
