@@ -48,6 +48,7 @@ Lane.propTypes = {
   addNote: PropTypes.func,
   updateLane: PropTypes.func,
   deletelane: PropTypes.func,
+  editLane: PropTypes.func,
 };
 
 export default Lane;

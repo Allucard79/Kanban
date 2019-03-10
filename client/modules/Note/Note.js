@@ -36,6 +36,7 @@ const noteSource = {
     return {
       id: props.id,
       laneId: props.laneId,
+      _id: props._id,
     };
   },
   isDragging(props, monitor) {
