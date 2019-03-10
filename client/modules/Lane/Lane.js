@@ -27,7 +27,7 @@ class Lane extends React.Component {
             onUpdate={name => updateLane({...lane, name, editing: false,})}
           />
           <div className={styles.LaneDelete}>
-            <button onClick={() => deleteLane(laneId)}>✖ column</button>
+            <button onClick={() => deleteLane(laneId)}>✖</button>
           </div>
           <div className={styles.LaneAddNote}>
             <button onClick={() => addNote({ task: 'new card'}, laneId)}>✚ card</button>

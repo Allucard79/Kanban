@@ -14,7 +14,7 @@ import styles from './Kanban.css';
 
 const Kanban = props => (
   <div className={styles.laneButton}>
-    <button className={styles.addLaneButton} onClick={() => props.createLane({ name: 'New column' })}>✚ column</button>
+    <button className={styles.addLaneButton} onClick={() => props.createLane({ name: 'New list' })}>✚ list</button>
     <Lanes lanes={props.lanes} />
   </div>
 );
