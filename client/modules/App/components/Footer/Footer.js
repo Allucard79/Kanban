@@ -6,8 +6,7 @@ import styles from './Footer.css';
 
 export function Footer() {
   return (
-    <div className={styles.footer}>
-    </div>
+    <div className={styles.footer} />
   );
 }
 

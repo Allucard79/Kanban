@@ -10,7 +10,7 @@ test('action for TOGGLE_ADD_POST is working', reducerTest(
   { showAddPost: true },
 ));
 
-test('getShowAddPost selector', t => {
+test('getShowAddPost selector', (t) => {
   t.is(getShowAddPost({
     app: { showAddPost: false },
   }), false);

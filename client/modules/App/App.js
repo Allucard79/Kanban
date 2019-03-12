@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Import Style
+import Helmet from 'react-helmet';
 import styles from './App.css';
 
 // Import Components
-import Helmet from 'react-helmet';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 // Import Actions
 import { toggleAddPost } from './AppActions';
-import { switchLanguage } from '../../modules/Intl/IntlActions';
+import { switchLanguage } from '../Intl/IntlActions';
 
 let DevTools;
 if (process.env.NODE_ENV === 'development') {

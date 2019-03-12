@@ -8,26 +8,30 @@ export default class Edit extends Component {
       this.finishEdit(e);
     }
   }
+
   finishEdit = (e) => {
-    const value = e.target.value;
+    const { value } = e.target;
 
     if (this.props.onUpdate) {
       this.props.onUpdate(value.trim());
     }
   }
+
   renderDelete = () => {
     return <button className={styles.delete} onClick={this.props.onDelete}>✖</button>;
   }
+
   renderValue = () => {
     const { value, onDelete, onValueClick } = this.props;
 
-    return(
+    return (
       <div className={styles.laneName}>
         <span className={styles.value} onClick={onValueClick}>{value}</span>
         {onDelete ? this.renderDelete() : null}
       </div>
     );
   }
+
   renderEdit = () => {
     return (
       <input
@@ -39,6 +43,7 @@ export default class Edit extends Component {
       />
     );
   }
+
   render() {
     return (
       <div className={this.props.className}>

@@ -1,5 +1,5 @@
-import Lane from '../models/lane';
 import uuid from 'uuid';
+import Lane from '../models/lane';
 
 export function getSomething(req, res) {
   return res.status(200).end();
@@ -45,10 +45,10 @@ export function deleteLane(req, res) {
 }
 
 export function editLaneName(req, res) {
-  Lane.findOneAndUpdate({id: req.body.id}, req.body, {new: true}).exec((err, newlane) => {
+  Lane.findOneAndUpdate({ id: req.body.id }, req.body, { new: true }).exec((err, newlane) => {
     if (err) {
       res.status(500).send(err);
     }
     res.json(newlane);
-  })
+  });
 }

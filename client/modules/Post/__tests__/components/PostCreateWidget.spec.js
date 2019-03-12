@@ -10,7 +10,7 @@ const props = {
   showAddPost: true,
 };
 
-test('renders properly', t => {
+test('renders properly', (t) => {
   const wrapper = shallowWithIntl(
     <PostCreateWidget {...props} />
   );
@@ -22,7 +22,7 @@ test('renders properly', t => {
   t.is(wrapper.find('textarea').length, 1);
 });
 
-test('hide when showAddPost is false', t => {
+test('hide when showAddPost is false', (t) => {
   const wrapper = mountWithIntl(
     <PostCreateWidget {...props} />
   );
@@ -31,7 +31,7 @@ test('hide when showAddPost is false', t => {
   t.falsy(wrapper.hasClass('appear'));
 });
 
-test('has correct props', t => {
+test('has correct props', (t) => {
   const wrapper = mountWithIntl(
     <PostCreateWidget {...props} />
   );
@@ -40,7 +40,7 @@ test('has correct props', t => {
   t.is(wrapper.prop('showAddPost'), props.showAddPost);
 });
 
-test('calls addPost', t => {
+test('calls addPost', (t) => {
   const addPost = sinon.spy();
   const wrapper = mountWithIntl(
     <PostCreateWidget addPost={addPost} showAddPost />
@@ -55,7 +55,7 @@ test('calls addPost', t => {
   t.truthy(addPost.calledWith('David', 'Some Title', 'Bla Bla Bla'));
 });
 
-test('empty form doesn\'t call addPost', t => {
+test('empty form doesn\'t call addPost', (t) => {
   const addPost = sinon.spy();
   const wrapper = mountWithIntl(
     <PostCreateWidget addPost={addPost} showAddPost />

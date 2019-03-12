@@ -7,6 +7,7 @@ import ItemTypes from '../Kanban/itemTypes';
 
 // Import Style
 import styles from './Note.css';
+
 class Note extends React.Component {
   constructor(props) {
     super(props);
@@ -14,21 +15,31 @@ class Note extends React.Component {
   }
 
   render() {
-    const {connectDragSource, connectDropTarget, isDragging, editing, children} = this.props;
+    const {
+      connectDragSource, connectDropTarget, isDragging, editing, children,
+    } = this.props;
 
     const dragSource = editing ? a => a : connectDragSource;
 
     return dragSource(connectDropTarget(
-      <li className={styles.Note}
+      <li
+        className={styles.Note}
         style={{
-          opacity: isDragging ? 0 : 1
-        }} >{children}</li>
+          opacity: isDragging ? 0 : 1,
+        }}
+      >
+        {children}
+      </li>
     ));
   }
 }
 
 Note.propTypes = {
   children: PropTypes.any,
+  connectDragSource: PropTypes.any,
+  connectDropTarget: PropTypes.any,
+  isDragging: PropTypes.any,
+  editing: PropTypes.any,
 };
 
 const noteSource = {
@@ -41,18 +52,18 @@ const noteSource = {
   },
   isDragging(props, monitor) {
     return props.id === monitor.getItem().id;
-  }
+  },
 };
 
 const noteTarget = {
   hover(targetProps, monitor) {
     const sourceProps = monitor.getItem();
 
-    const sameLane = targetProps.laneId === sourceProps.laneId
+    const sameLane = targetProps.laneId === sourceProps.laneId;
     if (targetProps.id !== sourceProps.id && sameLane) {
       targetProps.moveWithinLane(targetProps.laneId, targetProps.id, sourceProps.id);
     }
-  }
+  },
 };
 
 export default compose(
@@ -60,7 +71,7 @@ export default compose(
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging(),
   })),
-  DropTarget(ItemTypes.NOTE, noteTarget, (connect) => ({
-    connectDropTarget: connect.dropTarget()
+  DropTarget(ItemTypes.NOTE, noteTarget, connect => ({
+    connectDropTarget: connect.dropTarget(),
   }))
 )(Note);

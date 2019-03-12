@@ -27,7 +27,7 @@ Kanban.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  lanes: Object.values(state.lanes)
+  lanes: Object.values(state.lanes),
 });
 
 const mapDispatchToProps = {

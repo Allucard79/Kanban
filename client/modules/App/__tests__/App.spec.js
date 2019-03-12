@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import test from 'ava';
 import sinon from 'sinon';
 import { shallow, mount } from 'enzyme';
+import { intlShape } from 'react-intl';
 import { App } from '../App';
 import styles from '../App.css';
-import { intlShape } from 'react-intl';
 import { intl } from '../../../util/react-intl-test-helper';
 import { toggleAddPost } from '../AppActions';
 
@@ -18,7 +18,7 @@ const props = {
   intl: intlProp,
 };
 
-test('renders properly', t => {
+test('renders properly', (t) => {
   const wrapper = shallow(
     <App {...props} />
   );
@@ -31,7 +31,7 @@ test('renders properly', t => {
   t.truthy(wrapper.find('Header + div').children(), children);
 });
 
-test('calls componentDidMount', t => {
+test('calls componentDidMount', (t) => {
   sinon.spy(App.prototype, 'componentDidMount');
   mount(
     <App {...props} />,
@@ -60,7 +60,7 @@ test('calls componentDidMount', t => {
   App.prototype.componentDidMount.restore();
 });
 
-test('calling toggleAddPostSection dispatches toggleAddPost', t => {
+test('calling toggleAddPostSection dispatches toggleAddPost', (t) => {
   const wrapper = shallow(
     <App {...props} />
   );

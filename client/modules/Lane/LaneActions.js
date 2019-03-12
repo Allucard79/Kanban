@@ -1,6 +1,6 @@
+import { normalize } from 'normalizr';
 import callApi from '../../util/apiCaller';
 import { lanes } from '../../util/schema';
-import { normalize } from 'normalizr';
 import { createNotes } from '../Note/NoteActions';
 
 // Export Constants
@@ -22,13 +22,13 @@ export function createLane(lane) {
     lane: {
       notes: [],
       ...lane,
-    }
+    },
   };
 }
 
 export function createLaneRequest(lane) {
   return (dispatch) => {
-    return callApi('lanes', 'post', lane).then(res => {
+    return callApi('lanes', 'post', lane).then((res) => {
       dispatch(createLane(res));
     });
   };
@@ -43,7 +43,7 @@ export function updateLane(lane) {
 
 export function updateLaneRequest(lane) {
   return (dispatch) => {
-    return callApi('lanes', 'put', {id: lane.id, name: lane.name}).then(res => {
+    return callApi('lanes', 'put', { id: lane.id, name: lane.name }).then(() => {
       dispatch(updateLane(lane));
     });
   };
@@ -52,7 +52,7 @@ export function updateLaneRequest(lane) {
 export function deleteLane(laneId) {
   return {
     type: DELETE_LANE,
-    laneId
+    laneId,
   };
 }
 
@@ -67,7 +67,7 @@ export function deleteLaneRequest(laneId) {
 export function editLane(laneId) {
   return {
     type: EDIT_LANE,
-    laneId
+    laneId,
   };
 }
 
@@ -92,7 +92,7 @@ export function removeFromLane(sourceLaneId, noteId) {
     type: REMOVE_FROM_LANE,
     sourceLaneId,
     noteId,
-  }
+  };
 }
 
 export function pushToLane(targetLaneId, noteId) {
@@ -100,21 +100,21 @@ export function pushToLane(targetLaneId, noteId) {
     type: PUSH_TO_LANE,
     targetLaneId,
     noteId,
-  }
+  };
 }
 
 export function changeLanesRequest(sourceLaneId, targetLaneId, noteId, newNotes) {
   return (dispatch) => {
-    return callApi(`lanes`)
+    return callApi('lanes')
 
       .then((res) => {
         const newSourceLane = res.lanes.find(lane => lane.id === sourceLaneId);
-        const newSourceNotes= newSourceLane.notes.filter(note => note.id !== noteId).map(note => note._id)
-        callApi('lanes','put', {id: sourceLaneId, notes: newSourceNotes})
+        const newSourceNotes = newSourceLane.notes.filter(note => note.id !== noteId).map(note => note._id);
+        callApi('lanes', 'put', { id: sourceLaneId, notes: newSourceNotes });
       })
-      
-      .then((res) => {
-        callApi('lanes','put', {id: targetLaneId, notes: newNotes})
+
+      .then(() => {
+        callApi('lanes', 'put', { id: targetLaneId, notes: newNotes });
       })
 
       .then(() => {
@@ -126,21 +126,20 @@ export function changeLanesRequest(sourceLaneId, targetLaneId, noteId, newNotes)
           targetLaneId,
           noteId,
         ));
-      }
-    )
-    .catch(err => {
-      console.log(err);
-    })
-  }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 }
 
 // Endpoints Actions
 
 export function fetchLanes() {
   return (dispatch) => {
-    return callApi('lanes').then(res => {
+    return callApi('lanes').then((res) => {
       const normalized = normalize(res.lanes, lanes);
-      const {lanes: normalizedLanes, notes} = normalized.entities;
+      const { lanes: normalizedLanes, notes } = normalized.entities;
 
       dispatch(createLanes(normalizedLanes));
       dispatch(createNotes(notes));

@@ -8,7 +8,7 @@ import { intl } from '../../../../util/react-intl-test-helper';
 
 const intlProp = { ...intl, enabledLanguages: ['en', 'fr'] };
 
-test('renders the header properly', t => {
+test('renders the header properly', (t) => {
   const router = {
     isActive: sinon.stub().returns(true),
   };
@@ -26,7 +26,7 @@ test('renders the header properly', t => {
   t.is(wrapper.find('a').length, 1);
 });
 
-test('doesn\'t add post in pages other than home', t => {
+test('doesn\'t add post in pages other than home', (t) => {
   const router = {
     isActive: sinon.stub().returns(false),
   };
@@ -43,7 +43,7 @@ test('doesn\'t add post in pages other than home', t => {
   t.is(wrapper.find('a').length, 0);
 });
 
-test('toggleAddPost called properly', t => {
+test('toggleAddPost called properly', (t) => {
   const router = {
     isActive: sinon.stub().returns(true),
   };

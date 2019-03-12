@@ -12,6 +12,7 @@ class Lane extends React.Component {
     super(props);
     this.props = props;
   }
+
   render() {
     const { connectDropTarget, lane, laneNotes, updateLane, addNote, deleteLane, editLane } = this.props;
     const laneId = lane.id;
@@ -24,13 +25,13 @@ class Lane extends React.Component {
             editing={lane.editing}
             value={lane.name}
             onValueClick={() => editLane(lane.id)}
-            onUpdate={name => updateLane({...lane, name, editing: false,})}
+            onUpdate={name => updateLane({ ...lane, name, editing: false })}
           />
           <div className={styles.LaneDelete}>
-            <button onClick={() => deleteLane(laneId)}>✖</button>
+            <button onClick={() => deleteLane(laneId)}>✖ list</button>
           </div>
           <div className={styles.LaneAddNote}>
-            <button onClick={() => addNote({ task: 'new card'}, laneId)}>✚ card</button>
+            <button onClick={() => addNote({ task: 'new card' }, laneId)}>✚ card</button>
           </div>
         </div>
         <NoteContainer
@@ -47,8 +48,9 @@ Lane.propTypes = {
   laneNotes: PropTypes.array,
   addNote: PropTypes.func,
   updateLane: PropTypes.func,
-  deletelane: PropTypes.func,
+  deleteLane: PropTypes.func,
   editLane: PropTypes.func,
+  connectDropTarget: PropTypes.func,
 };
 
 export default Lane;

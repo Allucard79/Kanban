@@ -25,7 +25,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute
       getComponent={(nextState, cb) => {
-        require.ensure([], require => {
+        require.ensure([], (require) => {
           cb(null, require('./modules/Kanban/Kanban').default);
         });
       }}

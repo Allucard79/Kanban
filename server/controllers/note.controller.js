@@ -1,6 +1,6 @@
+import uuid from 'uuid';
 import Note from '../models/note';
 import Lane from '../models/lane';
-import uuid from 'uuid';
 
 export function getSomething(req, res) {
   return res.status(200).end();
@@ -24,7 +24,7 @@ export function addNote(req, res) {
       res.status(500).send(err);
     }
     Lane.findOne({ id: laneId })
-      .then(lane => {
+      .then((lane) => {
         lane.notes.push(saved);
         return lane.save();
       })
@@ -48,16 +48,16 @@ export function deleteNote(req, res) {
         lane.notes.pull(note);
         lane.save();
         res.status(200).send(note);
-      })
+      });
     }
-  })
+  });
 }
 
 export function editNoteTask(req, res) {
-  Note.findOneAndUpdate({ id: req.body.id}, req.body, {new: true}).exec((err, newtask) => {
+  Note.findOneAndUpdate({ id: req.body.id }, req.body, { new: true }).exec((err, newtask) => {
     if (err) {
       res.status(500).send(err);
     }
     res.json(newtask);
-  })
+  });
 }

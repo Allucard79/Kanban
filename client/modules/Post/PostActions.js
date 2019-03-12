@@ -34,7 +34,7 @@ export function addPosts(posts) {
 
 export function fetchPosts() {
   return (dispatch) => {
-    return callApi('posts').then(res => {
+    return callApi('posts').then((res) => {
       dispatch(addPosts(res.posts));
     });
   };

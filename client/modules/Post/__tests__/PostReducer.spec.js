@@ -14,26 +14,30 @@ test('action for ADD_POST is working', reducerTest(
     cuid: null,
     slug: 'first-post',
   }),
-  { data: [{
-    name: 'prank',
-    title: 'first post',
-    content: 'Hello world!',
-    _id: null,
-    cuid: null,
-    slug: 'first-post',
-  }, 'foo'] },
+  {
+    data: [{
+      name: 'prank',
+      title: 'first post',
+      content: 'Hello world!',
+      _id: null,
+      cuid: null,
+      slug: 'first-post',
+    }, 'foo'],
+  },
 ));
 
 test('action for DELETE_POST is working', reducerTest(
   postReducer,
-  { data: [{
-    name: 'prank',
-    title: 'first post',
-    content: 'Hello world!',
-    cuid: 'abc',
-    _id: 1,
-    slug: 'first-post',
-  }] },
+  {
+    data: [{
+      name: 'prank',
+      title: 'first post',
+      content: 'Hello world!',
+      cuid: 'abc',
+      _id: 1,
+      slug: 'first-post',
+    }],
+  },
   deletePost('abc'),
   { data: [] },
 ));
@@ -51,17 +55,19 @@ test('action for ADD_POSTS is working', reducerTest(
       slug: 'first-post',
     },
   ]),
-  { data: [{
-    name: 'prank',
-    title: 'first post',
-    content: 'Hello world!',
-    _id: null,
-    cuid: null,
-    slug: 'first-post',
-  }] },
+  {
+    data: [{
+      name: 'prank',
+      title: 'first post',
+      content: 'Hello world!',
+      _id: null,
+      cuid: null,
+      slug: 'first-post',
+    }],
+  },
 ));
 
-test('getPosts selector', t => {
+test('getPosts selector', (t) => {
   t.deepEqual(
     getPosts({
       posts: { data: ['foo'] },
@@ -70,7 +76,7 @@ test('getPosts selector', t => {
   );
 });
 
-test('getPost selector', t => {
+test('getPost selector', (t) => {
   t.deepEqual(
     getPost({
       posts: { data: [{ cuid: '123' }] },
@@ -78,4 +84,3 @@ test('getPost selector', t => {
     { cuid: '123' }
   );
 });
-

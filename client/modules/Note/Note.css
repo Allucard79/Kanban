@@ -3,8 +3,12 @@
 .Notes {
     list-style: none;
     text-align: left;
-    margin: 10px;
+    margin: 5px;
     padding: 10px;
+  }
+
+  .Notes span:active {
+    cursor: move;
   }
   
   .Notes span {

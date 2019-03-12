@@ -6,8 +6,12 @@ import { connectDB, dropDB } from '../../util/test-helpers';
 
 // Initial posts added into test db
 const posts = [
-  new Post({ name: 'Prashant', title: 'Hello Mern', slug: 'hello-mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'" }),
-  new Post({ name: 'Mayank', title: 'Hi Mern', slug: 'hi-mern', cuid: 'f34gb2bh24b24b3', content: "All dogs bark 'mern!'" }),
+  new Post({
+    name: 'Prashant', title: 'Hello Mern', slug: 'hello-mern', cuid: 'f34gb2bh24b24b2', content: "All cats meow 'mern!'",
+  }),
+  new Post({
+    name: 'Mayank', title: 'Hi Mern', slug: 'hi-mern', cuid: 'f34gb2bh24b24b3', content: "All dogs bark 'mern!'",
+  }),
 ];
 
 test.before('connect to mockgoose', async () => {
@@ -22,7 +26,7 @@ test.afterEach.always(async () => {
   await dropDB();
 });
 
-test.serial('Should correctly give number of Posts', async t => {
+test.serial('Should correctly give number of Posts', async (t) => {
   t.plan(2);
 
   const res = await request(app)
@@ -33,10 +37,12 @@ test.serial('Should correctly give number of Posts', async t => {
   t.deepEqual(posts.length, res.body.posts.length);
 });
 
-test.serial('Should send correct data when queried against a cuid', async t => {
+test.serial('Should send correct data when queried against a cuid', async (t) => {
   t.plan(2);
 
-  const post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
+  const post = new Post({
+    name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo',
+  });
   post.save();
 
   const res = await request(app)
@@ -47,7 +53,7 @@ test.serial('Should send correct data when queried against a cuid', async t => {
   t.is(res.body.post.name, post.name);
 });
 
-test.serial('Should correctly add a post', async t => {
+test.serial('Should correctly add a post', async (t) => {
   t.plan(2);
 
   const res = await request(app)
@@ -61,10 +67,12 @@ test.serial('Should correctly add a post', async t => {
   t.is(savedPost.name, 'Foo');
 });
 
-test.serial('Should correctly delete a post', async t => {
+test.serial('Should correctly delete a post', async (t) => {
   t.plan(2);
 
-  const post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
+  const post = new Post({
+    name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo',
+  });
   post.save();
 
   const res = await request(app)
